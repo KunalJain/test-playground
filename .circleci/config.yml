@@ -1,17 +1,44 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1.6
 jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  setup:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:10.12
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Build Project
+          command: |
+            npm run build
+      - persist_to_workspace:
+          root: ~/app
+          paths:
+            - .
+
+  test:
+    working_directory: ~/app
+    docker:
+      - image: saucelabs/sauce-puppeteer:3.0.4-saucectl0.4.2
+    steps:
+      - attach_workspace:
+          at: ~/app
+      - run:
+          name: Puppeteer Tests
+          command: |
+            saucectl run -c ./.sauce/puppeteer.yml
+          environment:
+            BUILD_ID: $CIRCLE_BUILD_NUM
+            BUILD_ENV: CircleCI
+
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  version: 2
+  build-test:
+    jobs:
+      - setup
+      - test:
+          requires:
+            - setup
+
