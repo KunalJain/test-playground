@@ -1,21 +1,21 @@
-//describe('test hilton homepage', () => {
-//	test('should verify title of the page', async () => {
-//		const page = (await browser.pages())[0]
-//		await page.goto('https://www.hilton.com/en/hilton-honors/');
-//		expect(await page.title()).toBe('Hilton Honors - A Hotel Rewards Program');
-//	});
-//});
-//
-//describe('test find sign-in button', () => {
-//	test('should verify user can navigate to sign-in page', async () => {
-//		const page = (await browser.pages())[0]
-//		await page.goto('https://www.hilton.com/en/hilton-honors/');
-//	    await page.waitForSelector('.sc-hEsumM > .sc-feJyhm > .sc-caSCKo > .sc-fAjcbJ > .sc-TOsTZ:nth-child(3)')
-//        await page.click('.sc-hEsumM > .sc-feJyhm > .sc-caSCKo > .sc-fAjcbJ > .sc-TOsTZ:nth-child(3)')
-//        await page.navigationPromise;
-//		expect(await page.title()).toBe('Sign In - Hilton Honors');
-//	});
-//});
+describe('test hilton homepage', () => {
+	test('should verify title of the page', async () => {
+		const page = (await browser.pages())[0]
+		await page.goto('https://www.hilton.com/en/hilton-honors/');
+		expect(await page.title()).toBe('Hilton Honors - A Hotel Rewards Program');
+	});
+});
+
+describe('test find sign-in button', () => {
+	test('should verify user can navigate to sign-in page', async () => {
+		const page = (await browser.pages())[0]
+		await page.goto('https://www.hilton.com/en/hilton-honors/');
+	    await page.waitForSelector('.sc-hEsumM > .sc-feJyhm > .sc-caSCKo > .sc-fAjcbJ > .sc-TOsTZ:nth-child(3)')
+        await page.click('.sc-hEsumM > .sc-feJyhm > .sc-caSCKo > .sc-fAjcbJ > .sc-TOsTZ:nth-child(3)')
+        await page.navigationPromise;
+		expect(await page.title()).toBe('Sign In - Hilton Honors');
+	});
+});
 
 describe('test user can pay for the room', () => {
 	test('should verify payment screen loads', async () => {
@@ -46,7 +46,8 @@ describe('test user can pay for the room', () => {
       await page.waitForSelector('[class="RateTableItemstyles__CTAwrapper-wdgpu0-7 giDwMX"]');
       getFirstElement = await page.$$('[class="RateTableItemstyles__CTAwrapper-wdgpu0-7 giDwMX"]');
       await getFirstElement[0].click();
-      await page.waitFor(10000);
+      await page.waitFor(2000);
+
 
 //      await page.waitForSelector('[class="FormButtonstyles__FormSubmitButton-sc-1moeqoj-0 PaymentForm__BookButton-i43r5q-2 kHSleL"]');
 //      expect(await page.title()).toBe('Rates - Embassy Suites by Hilton Tuscaloosa Alabama Downtown');

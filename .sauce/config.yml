@@ -10,5 +10,5 @@ metadata:
 files:
   - ./tests/homepage.test.js
 image:
-  base: saucelabs/sauce-puppeteer
-  version: 3.0.4
+  base: saucelabs/stt-puppeteer-jest-node
+  version: v0.1.0
